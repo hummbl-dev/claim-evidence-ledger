@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "0.1",
+  "packetStatus": "candidate",
+  "ledgerManifest": {
+    "id": "cel:fixture:invalid-001",
+    "title": "Invalid Fixture Ledger",
+    "version": "0.1.0",
+    "scope": "Fixture ledger missing a required field."
+  },
+  "authority": {
+    "id": "cel:authority:fixture-issuer",
+    "name": "Fixture Issuer"
+  },
+  "claimEvidenceContract": {
+    "claim": "Fixture claim with missing receiptRef.",
+    "evidenceType": "document",
+    "sourceReference": {
+      "type": "uri",
+      "uri": "https://example.com/evidence/0001"
+    },
+    "verificationStatus": "unverified"
+  },
+  "receiptRequirements": {
+    "inclusionProof": "merkle",
+    "timestamp": true
+  }
+}
