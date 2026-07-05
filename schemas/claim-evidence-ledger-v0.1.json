@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hummbl-dev/claim-evidence-ledger/schemas/claim-evidence-ledger-v0.1.json",
+  "title": "Claim-Evidence Ledger Packet v0.1",
+  "description": "Candidate schema for a single claim-evidence packet in a claim-evidence ledger. Non-normative.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "packetStatus",
+    "ledgerManifest",
+    "authority",
+    "claimEvidenceContract",
+    "receiptRequirements"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "0.1",
+      "description": "Schema version this packet conforms to."
+    },
+    "packetStatus": {
+      "type": "string",
+      "enum": ["candidate", "verified", "superseded", "withdrawn"],
+      "description": "Lifecycle status of the packet."
+    },
+    "ledgerManifest": {
+      "type": "object",
+      "description": "Identifying metadata for the ledger this packet belongs to.",
+      "required": ["id", "title", "version", "scope"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable identifier for the ledger."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable title for the ledger."
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Version label for the ledger."
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Scope statement describing what the ledger covers."
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "description": "Who or what asserts this packet.",
+      "required": ["id", "name"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable identifier for the asserting authority."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable name for the asserting authority."
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional URI describing the authority."
+        }
+      }
+    },
+    "claimEvidenceContract": {
+      "type": "object",
+      "description": "The core claim-evidence pair.",
+      "required": [
+        "claim",
+        "evidenceType",
+        "sourceReference",
+        "verificationStatus",
+        "receiptRef"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "claim": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The statement being made."
+        },
+        "evidenceType": {
+          "type": "string",
+          "enum": ["document", "dataset", "log", "attestation", "media", "other"],
+          "description": "The kind of evidence offered."
+        },
+        "sourceReference": {
+          "type": "object",
+          "description": "Where the evidence lives.",
+          "required": ["type", "uri"],
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["uri", "contentHash", "ledgerEntry", "external"],
+              "description": "How the source is referenced."
+            },
+            "uri": {
+              "type": "string",
+              "minLength": 1,
+              "description": "URI, hash, or identifier locating the evidence."
+            },
+            "contentHash": {
+              "type": "string",
+              "description": "Optional content hash for integrity verification."
+            }
+          }
+        },
+        "verificationStatus": {
+          "type": "string",
+          "enum": ["unverified", "pending", "verified", "failed"],
+          "description": "Current verification state of the evidence."
+        },
+        "receiptRef": {
+          "type": "object",
+          "description": "Reference to a cryptographic receipt for this packet.",
+          "required": ["receiptId", "receiptUri"],
+          "additionalProperties": false,
+          "properties": {
+            "receiptId": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Identifier for the receipt."
+            },
+            "receiptUri": {
+              "type": "string",
+              "format": "uri",
+              "description": "URI where the receipt can be retrieved."
+            }
+          }
+        }
+      }
+    },
+    "receiptRequirements": {
+      "type": "object",
+      "description": "What a valid receipt for this packet must provide.",
+      "required": ["inclusionProof", "timestamp"],
+      "additionalProperties": false,
+      "properties": {
+        "inclusionProof": {
+          "type": "string",
+          "enum": ["merkle", "chainpoint", "opentimestamps", "other"],
+          "description": "Required proof type for inclusion in the ledger."
+        },
+        "timestamp": {
+          "type": "boolean",
+          "description": "Whether a timestamp anchor is required."
+        },
+        "anchor": {
+          "type": "string",
+          "enum": ["internal", "bitcoin", "ethereum", "other"],
+          "description": "Optional anchor type for the timestamp."
+        }
+      }
+    }
+  }
+}

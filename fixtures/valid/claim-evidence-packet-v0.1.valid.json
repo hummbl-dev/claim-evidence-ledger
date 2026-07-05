@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "0.1",
+  "packetStatus": "candidate",
+  "ledgerManifest": {
+    "id": "cel:fixture:valid-001",
+    "title": "Valid Fixture Ledger",
+    "version": "0.1.0",
+    "scope": "Fixture ledger exercising all required fields."
+  },
+  "authority": {
+    "id": "cel:authority:fixture-issuer",
+    "name": "Fixture Issuer"
+  },
+  "claimEvidenceContract": {
+    "claim": "Fixture claim: the referenced log entry was produced by the stated process.",
+    "evidenceType": "log",
+    "sourceReference": {
+      "type": "ledgerEntry",
+      "uri": "cel:ledger:fixture:entry-0001"
+    },
+    "verificationStatus": "unverified",
+    "receiptRef": {
+      "receiptId": "receipt:fixture:0001",
+      "receiptUri": "https://example.com/receipts/fixture-0001"
+    }
+  },
+  "receiptRequirements": {
+    "inclusionProof": "merkle",
+    "timestamp": true
+  }
+}
