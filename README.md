@@ -1,6 +1,6 @@
 # Claim Evidence Ledger
 
-$(System.Collections.Hashtable.Name) is a public seed repository for claim-evidence ledgers.
+Claim Evidence Ledger is a public seed repository for claim-evidence ledgers.
 
 ## Purpose
 
