@@ -29,35 +29,22 @@ This example uses cautious association language. It does not claim that any sing
   },
   "claimEvidenceContract": {
     "claim": "Regular physical activity is associated with lower all-cause mortality risk in adults.",
-    "evidenceType": "public-research-citation",
+    "evidenceType": "document",
     "sourceReference": {
-      "type": "url",
+      "type": "uri",
       "uri": "https://pubmed.ncbi.nlm.nih.gov/25844730/",
       "contentHash": "not-captured-in-example"
     },
-    "evidenceGrade": "public-indexed-research",
-    "verificationStatus": "example-not-verified-live",
-    "provenanceChain": [
-      {
-        "step": "source-selected",
-        "actor": "example-contributor",
-        "method": "public PubMed citation selected for schema demonstration"
-      },
-      {
-        "step": "claim-softened",
-        "actor": "example-contributor",
-        "method": "used association language to avoid causal overclaim"
-      }
-    ],
+    "verificationStatus": "unverified",
     "receiptRef": {
       "receiptId": "receipt:example:claim-evidence-0001",
-      "receiptUri": "examples/public-research-citation-ledger-entry.md"
+      "receiptUri": "https://github.com/hummbl-dev/claim-evidence-ledger/blob/main/examples/public-research-citation-ledger-entry.md"
     }
   },
   "receiptRequirements": {
-    "inclusionProof": "none-for-example",
+    "inclusionProof": "other",
     "timestamp": true,
-    "anchor": "example-file"
+    "anchor": "internal"
   }
 }
 ```
